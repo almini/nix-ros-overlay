@@ -416,7 +416,7 @@ in self.lib.makeScopeWithSplicing
   otherSplices
   keep
   (_: {})
-  (rosSelf: self.lib.composeManyExtensions ([
+  (rosSelf: self.lib.makeExtensible (rosSelf: self.lib.composeManyExtensions ([
     base
     (import (./. + "/${distro}/generated.nix"))
     overrides
@@ -425,4 +425,4 @@ in self.lib.makeScopeWithSplicing
   ++ self.lib.optional (version == 2) (import ./ros2-overlay.nix self)
   ++ [
     (import (./. + "/${distro}/overrides.nix") self)
-  ]) rosSelf {})
+  ]) rosSelf {}))
