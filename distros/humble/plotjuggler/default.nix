@@ -18,6 +18,11 @@ buildRosPackage {
   propagatedBuildInputs = [ ament-index-cpp binutils boost cppzmq qt5.qtbase qt5.qtsvg qt5.qtwebsockets qt5.qtx11extras rclcpp ];
   nativeBuildInputs = [ ament-cmake ];
 
+  postInstall = ''
+    mkdir -p $out/bin
+    ln -s $out/lib/plotjuggler/plotjuggler $out/bin/
+  '';
+
   meta = {
     description = ''PlotJuggler: juggle with data'';
     license = with lib.licenses; [ mpl20 ];
