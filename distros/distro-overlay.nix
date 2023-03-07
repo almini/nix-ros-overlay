@@ -310,10 +310,13 @@ let
     });
 
     rqt-topic = rosSuper.rqt-topic.overrideAttrs ({
-      nativeBuildInputs ? [], ...
+      nativeBuildInputs ? [], postFixup ? "", ...
     }: {
       dontWrapQtApps = false;
       nativeBuildInputs = nativeBuildInputs ++ [ self.qt5.wrapQtAppsHook ];
+      postFixup = postFixup + ''
+        wrapQtApp "$out/bin/rqt_topic"
+      '';
     });
 
     rviz = rosSuper.rviz.overrideAttrs ({
