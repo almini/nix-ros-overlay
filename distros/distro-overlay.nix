@@ -169,10 +169,13 @@ let
     });
 
     plotjuggler = rosSuper.plotjuggler.overrideAttrs ({
-      nativeBuildInputs ? [], ...
+      nativeBuildInputs ? [], postFixup ? "", ...
     }: {
       dontWrapQtApps = false;
       nativeBuildInputs = nativeBuildInputs ++ [ self.qt5.wrapQtAppsHook ];
+      postFixup = postFixup + ''
+        wrapQtApp "$out/lib/plotjuggler/plotjuggler"
+      '';
     });
 
     pr2-tilt-laser-interface = patchBoostSignals rosSuper.pr2-tilt-laser-interface;
